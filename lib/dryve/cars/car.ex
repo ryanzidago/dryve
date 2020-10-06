@@ -19,6 +19,7 @@ defmodule Dryve.Cars.Car do
     field :price, :integer
     field :make, :string
     field :model, :string
+    field :vin, :string
 
     timestamps()
   end
@@ -29,7 +30,8 @@ defmodule Dryve.Cars.Car do
     :kwh,
     :price,
     :make,
-    :model
+    :model,
+    :vin
   ]
 
   def changeset(car, params \\ %{}) do

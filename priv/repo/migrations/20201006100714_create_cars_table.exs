@@ -9,6 +9,7 @@ defmodule Dryve.Repo.Migrations.CreateCarsTable do
       add :price, :integer
       add :make, :string
       add :model, :string
+      add :vin, :string
 
       timestamps()
     end
