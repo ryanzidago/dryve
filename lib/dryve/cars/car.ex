@@ -1,6 +1,9 @@
 defmodule Dryve.Cars.Car do
   use Ecto.Schema
   import Ecto.Changeset
+  import Ecto.Query
+
+  alias Dryve.Repo
 
   @doc """
   A car has
@@ -38,5 +41,22 @@ defmodule Dryve.Cars.Car do
     car
     |> cast(params, @allowed_fields)
     |> check_constraint(:engine_type, name: :mutually_exclusive)
+  end
+
+  def search_by_make_and_model(make, model, limit \\ 3) do
+    from(
+      c in __MODULE__,
+      order_by: [
+        asc:
+          fragment(
+            "LEAST(levenshtein(?, ?), levenshtein(?, ?))",
+            c.model,
+            ^model,
+            c.make,
+            ^make
+          )
+      ],
+      limit: ^limit
+    )
   end
 end

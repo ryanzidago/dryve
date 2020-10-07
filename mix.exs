@@ -10,7 +10,8 @@ defmodule Dryve.MixProject do
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      test_path: ~w(test lib)
     ]
   end
 
@@ -20,7 +21,7 @@ defmodule Dryve.MixProject do
   def application do
     [
       mod: {Dryve.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :ex_machina]
     ]
   end
 
@@ -45,7 +46,8 @@ defmodule Dryve.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:faker, "~> 0.15"}
+      {:faker, "~> 0.15"},
+      {:ex_machina, "~> 2.4"}
     ]
   end
 
