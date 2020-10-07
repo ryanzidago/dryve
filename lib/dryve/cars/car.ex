@@ -45,15 +45,15 @@ defmodule Dryve.Cars.Car do
   def adjacent_prices do
     query = """
       WITH base AS (
-        SELECT lag(price, 2) OVER (ORDER BY price) lag,
-        lead(price, 2) OVER (ORDER BY price) lead,
+        SELECT lag(price, 2, 0) OVER (ORDER BY price) lag,
+        lead(price, 2, 0) OVER (ORDER BY price) lead,
         c.*
         FROM cars c
       )
       SELECT base.* FROM base
       JOIN(
         SELECT lag, lead
-        FROM base WHERE price = 5000
+        FROM base WHERE price = 50000
       ) sub ON base.price BETWEEN sub.lag AND sub.lead
     """
 
